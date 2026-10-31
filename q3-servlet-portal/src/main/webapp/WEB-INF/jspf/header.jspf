@@ -1,0 +1,12 @@
+<%-- header.jspf : included at the top of every private page --%>
+<%@ page import="com.portal.util.Html" %>
+<header class="topbar">
+  <span class="brand">🎓 Student Profile Portal</span>
+  <nav>
+    <a href="<%= request.getContextPath() %>/students">Students</a>
+    <span style="margin-left:1.1rem;color:#c7d2fe">
+      Signed in as <strong><%= Html.escape(session.getAttribute("fullName")) %></strong>
+    </span>
+    <a href="<%= request.getContextPath() %>/logout">Logout</a>
+  </nav>
+</header>

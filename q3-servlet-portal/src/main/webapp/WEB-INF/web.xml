@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  web.xml - the deployment descriptor. Tomcat reads this file first.
+  It tells Tomcat: which servlets exist, which URL each one answers,
+  which filter protects the private pages, and the database settings.
+  (Written for Tomcat 10+ / Jakarta EE.  For Tomcat 9 see README.)
+-->
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+  <display-name>Student Profile Portal</display-name>
+
+  <!-- ============ EDIT THESE FOUR VALUES FOR YOUR COMPUTER ============ -->
+  <context-param>
+    <param-name>db.driver</param-name>
+    <param-value>com.mysql.cj.jdbc.Driver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/student_portal?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Kolkata</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.user</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.password</param-name>
+    <param-value></param-value>
+  </context-param>
+  <!-- Absolute path of the folder where the PHP panel (Q2) saves uploads -->
+  <context-param>
+    <param-name>upload.dir</param-name>
+    <param-value>C:/xampp/htdocs/webtech-assignment-2/q2-php-crud/uploads</param-value>
+  </context-param>
+
+  <!-- Runs once at start-up and passes the values above to DBUtil -->
+  <listener>
+    <listener-class>com.portal.util.AppContextListener</listener-class>
+  </listener>
+
+  <!-- ===================== Servlet declarations ===================== -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.portal.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.portal.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StudentListServlet</servlet-name>
+    <servlet-class>com.portal.servlet.StudentListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentListServlet</servlet-name>
+    <url-pattern>/students</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StudentProfileServlet</servlet-name>
+    <servlet-class>com.portal.servlet.StudentProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentProfileServlet</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>FileServlet</servlet-name>
+    <servlet-class>com.portal.servlet.FileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileServlet</servlet-name>
+    <url-pattern>/file</url-pattern>
+  </servlet-mapping>
+
+  <!-- ============ Security filter: only logged-in users pass ============ -->
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>com.portal.filter.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/students</url-pattern>
+    <url-pattern>/profile</url-pattern>
+    <url-pattern>/file</url-pattern>
+  </filter-mapping>
+
+  <!-- ===================== Session settings ===================== -->
+  <session-config>
+    <session-timeout>30</session-timeout>   <!-- minutes of inactivity -->
+    <cookie-config>
+      <http-only>true</http-only>           <!-- JavaScript cannot read the session cookie -->
+    </cookie-config>
+  </session-config>
+
+  <!-- Read every JSP and JSP fragment (.jspf) as UTF-8 so emojis / Tamil text display correctly -->
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <url-pattern>*.jspf</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- Friendly error pages instead of the default Tomcat ones -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+</web-app>

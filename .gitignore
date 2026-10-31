@@ -1,0 +1,13 @@
+# uploaded files are runtime data, keep only the folder itself
+q2-php-crud/uploads/*
+!q2-php-crud/uploads/.gitkeep
+!q2-php-crud/uploads/.htaccess
+
+# Java build output and driver jars (download Connector/J yourself)
+q3-servlet-portal/build/
+*.war
+*.class
+q3-servlet-portal/src/main/webapp/WEB-INF/lib/*.jar
+
+# IDE / OS files
+.idea/ .vscode/ *.iml .DS_Store Thumbs.db

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport tag is what makes the layout responsive on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration | Admission Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <span class="brand">🎓 Student Admission Portal</span>
+    <nav>
+      <a href="index.html">Register</a>
+      <a href="../q2-php-crud/index.php">Admin Panel</a>
+    </nav>
+  </header>
+
+  <main class="container narrow">
+    <section class="card">
+      <h1>Student Registration</h1>
+      <p class="muted">Fields marked <span style="color:#dc2626">*</span> are required.</p>
+
+      <!--
+        action  : the PHP page from Q2 that stores the data in MySQL
+        enctype : multipart/form-data is mandatory, otherwise files are not sent
+        novalidate : switches off the browser's default pop-ups so our own
+                     JavaScript messages (validation.js) are shown instead
+      -->
+      <form id="regForm" action="../q2-php-crud/add.php" method="POST"
+            enctype="multipart/form-data" novalidate>
+
+        <div class="form-grid">
+
+          <!-- Full name -->
+          <div class="field">
+            <label for="name">Full Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="e.g. Amudan" autocomplete="name">
+            <span class="error-msg"></span>
+          </div>
+
+          <!-- Roll number -->
+          <div class="field">
+            <label for="roll_number">Roll Number <span class="req">*</span></label>
+            <input type="text" id="roll_number" name="roll_number" placeholder="e.g. 22CSE101" maxlength="15">
+            <span class="error-msg"></span>
+          </div>
+
+          <!-- Email -->
+          <div class="field">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
+            <span class="error-msg"></span>
+          </div>
+
+          <!-- Course drop-down -->
+          <div class="field">
+            <label for="course">Course <span class="req">*</span></label>
+            <select id="course" name="course">
+              <option value="">-- Select course --</option>
+              <option>B.E. Computer Science and Engineering</option>
+              <option>B.E. Electronics and Communication</option>
+              <option>B.E. Mechanical Engineering</option>
+              <option>B.Tech Artificial Intelligence and Data Science</option>
+              <option>B.Tech Information Technology</option>
+            </select>
+            <span class="error-msg"></span>
+          </div>
+
+          <!-- Password + strength meter -->
+          <div class="field">
+            <label for="password">Password <span class="req">*</span></label>
+            <input type="password" id="password" name="password" autocomplete="new-password">
+            <div class="meter"><span id="meterBar"></span></div>
+            <span class="meter-text" id="meterText">Use 8+ characters with upper, lower, number and symbol.</span>
+            <span class="error-msg"></span>
+          </div>
+
+          <!-- Confirm password -->
+          <div class="field">
+            <label for="confirm_password">Confirm Password <span class="req">*</span></label>
+            <input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password">
+            <span class="error-msg"></span>
+          </div>
+
+          <!-- File uploads -->
+          <div class="field">
+            <label for="profile_image">Profile Photo <span class="req">*</span></label>
+            <input type="file" id="profile_image" name="profile_image" accept=".jpg,.jpeg,.png,.webp">
+            <span class="hint">JPG / PNG / WEBP, max 2 MB</span>
+            <span class="error-msg"></span>
+          </div>
+
+          <div class="field">
+            <label for="id_proof">ID Proof <span class="req">*</span></label>
+            <input type="file" id="id_proof" name="id_proof" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="hint">PDF / JPG / PNG, max 5 MB</span>
+            <span class="error-msg"></span>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn">Register</button>
+          <button type="reset" class="btn secondary" id="resetBtn">Clear</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>Web Technology (U21CS501) &middot; Assignment II &middot; Q1</footer>
+
+  <script src="js/validation.js"></script>
+</body>
+</html>

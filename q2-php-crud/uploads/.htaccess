@@ -1,0 +1,4 @@
+# Safety net: never execute scripts that end up in the uploads folder
+php_flag engine off
+RemoveHandler .php .phtml .php3 .php5
+Options -Indexes -ExecCGI
