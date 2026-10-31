@@ -1,7 +1,7 @@
 # Web Technology (U21CS501) – Assignment II
 
-**Student:** Amudan &nbsp;|&nbsp; **Roll No.:** `<your roll number>` &nbsp;|&nbsp; **Class:** III Year CSE, Semester V, Section A  
-**Institution:** KPR Institute of Engineering and Technology (Autonomous), Coimbatore
+**Student:** S Makavishnu &nbsp;|&nbsp; **Roll No.:** 24CS108 &nbsp;|&nbsp; **Class:** III Year CSE, Semester V, Section A  
+
 
 A student admission and records system built in three parts. All three share **one MySQL database**
 and **one `uploads/` folder**, so a student registered in the HTML form (Q1) is stored by PHP (Q2)
